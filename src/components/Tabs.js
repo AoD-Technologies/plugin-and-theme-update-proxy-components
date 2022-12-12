@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@mui/material/styles'
 
 import HostingPanel from './HostingPanel'
 import SourcesPanel from './SourcesPanel'

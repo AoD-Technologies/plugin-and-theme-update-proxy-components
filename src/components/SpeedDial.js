@@ -4,14 +4,12 @@ import {
   SpeedDial as MUISpeedDial,
   SpeedDialIcon,
   SpeedDialAction
-} from '@material-ui/lab'
+} from '@mui/material'
 
 import {
   Add as AddIcon,
   Refresh as RefreshIcon
-} from '@material-ui/icons'
-
-import { makeStyles } from '@material-ui/core/styles'
+} from '@mui/icons-material'
 
 import { AddAuthenticationTokenDialogOpenSetterContext } from '../providers/AddAuthenticationTokenDialogOpen'
 import { AddSourceDialogOpenSetterContext } from '../providers/AddSourceDialogOpen'
@@ -20,23 +18,7 @@ import { VisibleTabContext } from '../providers/VisibleTab'
 import { WordPressPluginsSetterContext } from '../providers/WordPressPlugins'
 import { WordPressThemesSetterContext } from '../providers/WordPressThemes'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'fixed',
-    '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
-      bottom: theme.spacing(4),
-      right: theme.spacing(2)
-    },
-    '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
-      top: theme.spacing(2),
-      left: theme.spacing(2)
-    }
-  }
-}))
-
 const SpeedDial = () => {
-  const classes = useStyles()
-
   const [speedDialOpen, setSpeedDialOpen] = useState(false)
 
   const setAddAuthenticationTokenDialogOpen = useContext(
@@ -121,7 +103,17 @@ const SpeedDial = () => {
   return (
     <MUISpeedDial
       ariaLabel='Available Actions'
-      className={classes.root}
+      sx={{
+        position: 'fixed',
+        '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+          bottom: theme => theme.spacing(4),
+          right: theme => theme.spacing(2)
+        },
+        '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+          top: theme => theme.spacing(2),
+          left: theme => theme.spacing(2)
+        }
+      }}
       hidden={false}
       icon={<SpeedDialIcon />}
       onClose={handleSpeedDialClose}

@@ -8,14 +8,12 @@ import {
   DialogActions,
   DialogContent,
   Divider
-} from '@material-ui/core'
-
-import { makeStyles } from '@material-ui/core/styles'
+} from '@mui/material'
 
 import {
   Add as AddIcon,
   Sync as SyncIcon
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 
 import AddSourceDialog from './AddSourceDialog'
 import Source from './Source'
@@ -25,17 +23,7 @@ import { SnackBarShowMessageContext } from '../providers/SnackBar'
 import { WordPressPluginsContext } from '../providers/WordPressPlugins'
 import { WordPressThemesContext } from '../providers/WordPressThemes'
 
-const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    color: theme.palette.common.white,
-    zIndex: theme.zIndex.modal + 1,
-    flexDirection: 'column'
-  }
-}))
-
 const SourcesPanel = () => {
-  const classes = useStyles()
-
   const [loading, setLoading] = useState(true)
   const [source, setSource] = useState(null)
   const [showBackdrop, setShowBackdrop] = useState(false)
@@ -336,9 +324,11 @@ const SourcesPanel = () => {
       </Dialog>
       <Backdrop
         open={showBackdrop}
-        classes={{
-          root: classes.backdrop
-        }}
+        sx={{
+					color: 'common.white',
+					zIndex: theme => theme.zIndex.modal + 1,
+					flexDirection: 'column'
+				}}
       >
         <CircularProgress color='inherit' size={64} />
         <p>Saving, please wait...</p>

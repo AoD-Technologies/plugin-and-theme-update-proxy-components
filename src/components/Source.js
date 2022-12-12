@@ -8,10 +8,10 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  ExpansionPanel,
-  ExpansionPanelActions,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
   FormControl,
   FormGroup,
   FormControlLabel,
@@ -20,7 +20,7 @@ import {
   TextField,
   Tooltip,
   Typography
-} from '@material-ui/core'
+} from '@mui/material'
 
 import {
   Delete as DeleteIcon,
@@ -28,18 +28,20 @@ import {
   Settings as SettingsIcon,
   Sync as SyncIcon,
   SyncDisabled as SyncDisabledIcon
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 
-import { makeStyles } from '@material-ui/core/styles'
+import { styled } from '@mui/material/styles'
 
 import PackageList from './PackageList'
 
 import { WordPressPluginsContext } from '../providers/WordPressPlugins'
 import { WordPressThemesContext } from '../providers/WordPressThemes'
 
+const Div = styled('div')``
+
 const handleStopPropagation = (event) => event.stopPropagation()
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
   root: {
     width: '100%'
   },
@@ -49,11 +51,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 12
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15)
+    fontSize: theme => theme.typography.pxToRem(15)
   },
   secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
+    fontSize: theme => theme.typography.pxToRem(15),
+    color: 'text.secondary'
   },
   icon: {
     verticalAlign: 'bottom',
@@ -73,11 +75,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center'
   }
-}))
+}
 
 const Source = ({ source, index, onChange, onDelete, onInstall }) => {
-  const classes = useStyles()
-
   const plugins = useContext(WordPressPluginsContext)
   const themes = useContext(WordPressThemesContext)
 
@@ -231,46 +231,46 @@ const Source = ({ source, index, onChange, onDelete, onInstall }) => {
 
   return (
     <>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
+      <Accordion>
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`${idPrefix}-content`}
           id={`${idPrefix}-header`}
         >
-          <div
-            className={classes.dragHandle}
+          <Div
+            sx={styles.dragHandle}
             onClick={handleStopPropagation}
             onFocus={handleStopPropagation}
           />
           <Tooltip title={source.enabled ? 'Enabled' : 'Disabled'}>
-            <div
-              className={classes.dragHandle}
+            <Div
+              sx={styles.dragHandle}
               onClick={handleToggle}
               onFocus={handleStopPropagation}
             >
               {source.enabled ? <SyncIcon /> : <SyncDisabledIcon />}
-            </div>
+            </Div>
           </Tooltip>
           {source.label ? (
             <>
-              <div className={classes.labelColumn}>
-                <Typography className={classes.heading}>
+              <Div sx={styles.labelColumn}>
+                <Typography sx={styles.heading}>
                   {source.label}
                 </Typography>
-              </div>
-              <div className={classes.urlColumn}>
-                <Typography className={classes.secondaryHeading}>
+              </Div>
+              <Div sx={styles.urlColumn}>
+                <Typography sx={styles.secondaryHeading}>
                   {source.updateURL}
                 </Typography>
-              </div>
+              </Div>
             </>
           ) : (
-            <Typography className={classes.heading}>
+            <Typography sx={styles.heading}>
               {source.updateURL}
             </Typography>
           )}
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
+        </AccordionSummary>
+        <AccordionDetails sx={styles.details}>
           {!updatablePlugins.length && !installablePlugins.length ? (
             <h4>No Plugins Available</h4>
           ) : null}
@@ -317,9 +317,9 @@ const Source = ({ source, index, onChange, onDelete, onInstall }) => {
               />
             </>
           ) : null}
-        </ExpansionPanelDetails>
+        </AccordionDetails>
         <Divider />
-        <ExpansionPanelActions>
+        <AccordionActions>
           <Button
             size='small'
             color='primary'
@@ -336,8 +336,8 @@ const Source = ({ source, index, onChange, onDelete, onInstall }) => {
           >
             Delete
           </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+        </AccordionActions>
+      </Accordion>
       <Dialog
         open={configureDialogOpen}
         onClose={handleConfigureDialogClose}
@@ -384,7 +384,7 @@ const Source = ({ source, index, onChange, onDelete, onInstall }) => {
             required
             fullWidth
           />
-          <FormControl component='fieldset'>
+          <FormControl variant="standard" component='fieldset'>
             <FormGroup>
               <FormControlLabel
                 value='skipSSLCertificateChecks'

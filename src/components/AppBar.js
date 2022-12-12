@@ -4,7 +4,7 @@ import {
   AppBar as MUIAppBar,
   Tabs,
   Tab
-} from '@material-ui/core'
+} from '@mui/material'
 
 import {
   VisibleTabContext,

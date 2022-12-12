@@ -10,7 +10,7 @@ import {
   DialogContent,
   DialogTitle,
   TextField
-} from '@material-ui/core'
+} from '@mui/material'
 
 import {
   AddAuthenticationTokenDialogOpenContext,

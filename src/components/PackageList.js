@@ -6,7 +6,7 @@ import {
   FormControl,
   FormGroup,
   FormControlLabel
-} from '@material-ui/core'
+} from '@mui/material'
 
 const INSTALL_LINK_STYLE = {
   display: 'flex',
@@ -44,13 +44,13 @@ const PackageList = ({ onChange, packages, type, fieldName }) => {
   switch (type) {
     case 'select':
       return (
-        <FormControl component='fieldset'>
+        <FormControl variant="standard" component='fieldset'>
           <FormGroup>{packages.map(renderCheckbox)}</FormGroup>
         </FormControl>
       )
     case 'install':
       return (
-        <FormControl component='fieldset'>
+        <FormControl variant="standard" component='fieldset'>
           <FormGroup>{packages.map(renderInstallLink)}</FormGroup>
         </FormControl>
       )

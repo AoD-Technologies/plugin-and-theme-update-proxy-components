@@ -4,14 +4,13 @@ import {
   Backdrop,
   CircularProgress,
   Divider
-} from '@material-ui/core'
+} from '@mui/material'
 
 import {
   Add as AddIcon,
+  ContentCopyOutlined as ContentCopyOutlinedIcon,
   Wifi as WifiIcon
-} from '@material-ui/icons'
-
-import { makeStyles } from '@material-ui/core/styles'
+} from '@mui/icons-material'
 
 import AddAuthenticationTokenDialog from './AddAuthenticationTokenDialog'
 import AuthenticationToken from './AuthenticationToken'
@@ -22,17 +21,7 @@ import { SnackBarShowMessageContext } from '../providers/SnackBar'
 import { WordPressPluginsContext } from '../providers/WordPressPlugins'
 import { WordPressThemesContext } from '../providers/WordPressThemes'
 
-const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    color: theme.palette.common.white,
-    zIndex: theme.zIndex.modal + 1,
-    flexDirection: 'column'
-  }
-}))
-
 const HostingPanel = () => {
-  const classes = useStyles()
-
   const [loading, setLoading] = useState(true)
   const [authenticationTokens, setAuthenticationTokens] = useState([])
   const [showBackdrop, setShowBackdrop] = useState(false)
@@ -245,15 +234,7 @@ const HostingPanel = () => {
           ButtonProps={{
             size: 'small',
             startIcon: (
-              <svg
-                className='MuiSvgIcon-root'
-                focusable='false'
-                viewBox='0 0 24 24'
-                aria-hidden='true'
-                role='presentation'
-              >
-                <path d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z' />
-              </svg>
+              <ContentCopyOutlinedIcon />
             )
           }}
         />
@@ -303,9 +284,11 @@ const HostingPanel = () => {
       <AddAuthenticationTokenDialog onAdd={handleAdd} />
       <Backdrop
         open={showBackdrop}
-        classes={{
-          root: classes.backdrop
-        }}
+        sx={{
+					color: 'common.white',
+					zIndex: (theme) => theme.zIndex.modal + 1,
+					flexDirection: 'column'
+				}}
       >
         <CircularProgress color='inherit' size={64} />
         <p>Saving, please wait...</p>

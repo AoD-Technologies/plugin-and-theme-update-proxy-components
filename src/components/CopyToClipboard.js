@@ -6,7 +6,7 @@ import copyToClipboard from 'clipboard-copy'
 import {
   Button,
   Tooltip
-} from '@material-ui/core'
+} from '@mui/material'
 
 const CopyToClipboard = ({
   ButtonProps,

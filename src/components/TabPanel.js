@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {
   Box,
   Typography
-} from '@material-ui/core'
+} from '@mui/material'
 
 const TabPanel = ({ children, value, index, ...other }) => (
   <Typography
@@ -14,7 +14,7 @@ const TabPanel = ({ children, value, index, ...other }) => (
     aria-labelledby={`action-tab-${index}`}
     {...other}
   >
-    <Box p={3}>{children}</Box>
+    <Box sx={{ p: 3 }}>{children}</Box>
   </Typography>
 )
 

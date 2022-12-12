@@ -13,7 +13,7 @@ import {
   FormHelperText,
   Switch,
   TextField
-} from '@material-ui/core'
+} from '@mui/material'
 
 import {
   AddSourceDialogOpenContext,
@@ -36,7 +36,8 @@ const AddSourceDialog = ({ onAdd }) => {
       authenticationToken: authenticationTokenEl.current.value,
       skipSSLCertificateChecks: skipSSLCertificateChecksEl.current.checked,
       enabled: true,
-      selectedPlugins: []
+      selectedPlugins: [],
+      selectedThemes: []
     })
   }, [onAdd])
 
@@ -86,7 +87,7 @@ const AddSourceDialog = ({ onAdd }) => {
           required
           fullWidth
         />
-        <FormControl component='fieldset'>
+        <FormControl variant="standard" component='fieldset'>
           <FormGroup>
             <FormControlLabel
               value='skipSSLCertificateChecks'
